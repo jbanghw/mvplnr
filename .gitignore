@@ -64,7 +64,6 @@ db.sqlite3-journal
 # DS STORE
 .DS_Store
 
-
 # Flask stuff:
 instance/
 .webassets-cache

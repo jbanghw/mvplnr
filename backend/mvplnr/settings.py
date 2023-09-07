@@ -144,7 +144,7 @@ CORS_ORIGIN_WHITELIST = [
     'http://localhost:3000',
 ]
 
-IMDB_API_KEY = ''
+IMDB_API_KEY = 'k_e1gnyu67'
 
 SIMPLE_JWT = {
     'ACCESS_TOKEN_LIFETIME': timedelta(days=1),
