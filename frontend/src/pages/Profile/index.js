@@ -1,22 +1,7 @@
 import React, { useEffect, useState  } from 'react';
-import { Stack, Pagination, Paper, Grid, ToggleButtonGroup, ToggleButton, TextField } from "@mui/material";
+import { Stack, Pagination, Grid, ToggleButtonGroup, ToggleButton, TextField } from "@mui/material";
 import { useNavigate } from "react-router-dom";
-import { styled } from '@mui/material/styles';
 import MovieList from "./List";
-
-
-const Item = styled(Paper)(({ theme }) => ({
-  backgroundColor: theme.palette.mode === 'dark' ? '#1A2027' : '#fff',
-  ...theme.typography.body2,
-  padding: theme.spacing(1),
-  textAlign: 'center',
-  color: theme.palette.text.secondary,
-  flexGrow: 1,
-  width: '100%',
-  height: '100%',
-  border: 'none',
-}));
-
 
 
 export default function Profile() {
@@ -95,7 +80,6 @@ export default function Profile() {
         spacing={2}
         pt={3}
       >
-        <Item>
           <Grid
             container
             direction="row"
@@ -122,8 +106,6 @@ export default function Profile() {
               />
             </Grid>
           </Grid>
-        </Item>
-        <Item>
           <MovieList
             movies={movies}
             dateOrder={dateOrder}
@@ -131,7 +113,6 @@ export default function Profile() {
             entryChanged={entryChanged}
             setEntryChanged={setEntryChanged}
           />
-        </Item>
         <Pagination
           count={pageCount}
           color='primary'

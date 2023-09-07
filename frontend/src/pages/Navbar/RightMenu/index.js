@@ -2,8 +2,11 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Typography, Box, IconButton, Menu, MenuItem } from '@mui/material';
 import PersonIcon from '@mui/icons-material/Person';
+import { useContext } from 'react';
+import { LoggedinContext } from '../../../App';
 
 export default function RightMenu() {
+  const { loggedin, setLoggedin } = useContext(LoggedinContext);
   const [anchorElUser, setAnchorElUser] = useState(null);
   const navigate = useNavigate();
 
@@ -52,6 +55,7 @@ export default function RightMenu() {
         <MenuItem
           onClick={() => {
             localStorage.removeItem('access');
+            setLoggedin(localStorage.getItem('access'));
             handleCloseUserMenu();
             navigate('/login');
           }}

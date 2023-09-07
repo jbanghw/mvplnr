@@ -1,6 +1,6 @@
 import Typography from '@mui/material/Typography';
-import { Grid, Paper, ButtonBase, styled, Button } from '@mui/material';
-import { useNavigate } from 'react-router-dom';
+import { Grid, styled, Button, Box } from '@mui/material';
+import { Link } from 'react-router-dom';
 
 const Img = styled('img')({
   margin: 'auto',
@@ -9,54 +9,60 @@ const Img = styled('img')({
   maxHeight: '100%',
 });
 
-
 const MovieListItem = ({ movie_id, title, poster, description }) => {
-  const navigate = useNavigate();
-
-  const handleViewMore = (e) => {
-    navigate(`/movie/${movie_id}`);
-  };
-
   return (
-    <Paper
-      sx={{
-        p: 2,
-        margin: 'auto',
-        maxWidth: 600,
-        flexGrow: 1,
-        backgroundColor: 'WhiteSmoke'
-      }}
-    >
-      <Grid container spacing={2}>
-        <Grid item>
-          <ButtonBase sx={{ width: 128, height: 128 }}>
-            <Img src={poster} />
-          </ButtonBase>
-        </Grid>
-        <Grid item xs={12} sm container>
-          <Grid item xs container direction="column" spacing={2}>
-            <Grid item xs>
-              <Typography gutterBottom variant="subtitle1" component="div">
-                {title}
-              </Typography>
-              <Typography variant="body2" gutterBottom>
-                {description}
-              </Typography>
-            </Grid>
-            <Grid item xs textAlign={'right'}>
-              <Button variant='text' onClick={handleViewMore}>
+    <Grid container spacing={2} maxHeight={'200px'}>
+      <Grid item xs={3}>
+        <Box sx={{ width: 160, height: 160, }}>
+          <Img src={poster} />
+        </Box>
+      </Grid>
+      <Grid item xs={9} container>
+        <Grid
+          item
+          xs
+          container
+          direction="column"
+          spacing={2}
+        >
+          <Grid item xs>
+            <Typography
+              gutterBottom
+              variant="h6"
+              sx={{
+                fontFamily: 'monospace',
+              }}
+            >
+              {title}
+            </Typography>
+            <Typography
+              variant="body2"
+              gutterBottom
+              sx={{
+                fontFamily: 'monospace',
+              }}
+            >
+              {description}
+            </Typography>
+          </Grid>
+          <Grid item textAlign={'right'} >
+            <Link to={`/movie/${movie_id}`}>
+              <Button variant='text'>
                 <Typography
-                  sx={{ cursor: 'pointer' }}
-                  variant="body2"
+                  sx={{
+                    cursor: 'pointer',
+                    fontFamily: 'monospace',
+                  }}
+                  variant="body1"
                 >
                   View More
                 </Typography>
               </Button>
-            </Grid>
+            </Link>
           </Grid>
         </Grid>
       </Grid>
-    </Paper>
+    </Grid>
   );
 };
 

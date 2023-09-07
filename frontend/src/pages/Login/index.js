@@ -3,7 +3,8 @@ import {
 } from '@mui/material';
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import { useNavigate } from 'react-router-dom';
-import { useState } from 'react';
+import { useState, useContext } from 'react';
+import { LoggedinContext } from '../../App';
 import './style.css';
 
 const Authorization = ({value}) => {
@@ -23,6 +24,8 @@ const Authorization = ({value}) => {
 };
 
 export default function Login() {
+  const { loggedin, setLoggedin } = useContext(LoggedinContext);
+
   // error messages for the fields
   const [usernameError, setUsernameError] = useState('');
   const [passwordError, setPasswordError] = useState('');
@@ -51,6 +54,7 @@ export default function Login() {
     .then(response => {
       if (allGood) {
         localStorage.setItem('access', response['access']);
+        setLoggedin(response['access']);
         navigate('/');
       } else {
         if ('detail' in response) {

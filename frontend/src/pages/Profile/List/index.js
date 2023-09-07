@@ -4,7 +4,7 @@ import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import TableCell from '@mui/material/TableCell';
 import { Snackbar } from '@mui/material';
-import { Typography, Link, IconButton } from '@mui/material';
+import { Typography, IconButton } from '@mui/material';
 import { useState } from 'react';
 
 import VisibilityIcon from '@mui/icons-material/Visibility';
@@ -13,6 +13,7 @@ import DeleteIcon from '@mui/icons-material/Delete';
 import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
 import ArrowDropUpIcon from '@mui/icons-material/ArrowDropUp';
 import CloseIcon from '@mui/icons-material/Close';
+import { Link } from 'react-router-dom';
 
 const MovieList = ({ movies, dateOrder, setDateOrder, entryChanged, setEntryChanged }) => {
   /*
@@ -124,17 +125,23 @@ const MovieList = ({ movies, dateOrder, setDateOrder, entryChanged, setEntryChan
       >
         <TableHead>
           <TableRow>
-            <TableCell width='300px' style={{ fontWeight: 'bold', fontSize: 18 }}>Title</TableCell>
-            <TableCell align='center' style={{ fontWeight: 'bold', fontSize: 18 }}>
+            <TableCell width='300px' style={{ fontWeight: 'bold', fontSize: 18, fontFamily: 'monospace' }}>
+              Title
+            </TableCell>
+            <TableCell align='center' style={{ fontWeight: 'bold', fontSize: 18, fontFamily: 'monospace' }}>
               Date Added
               <IconButton
                 onClick={handleDateOrderChange}
               >
-                {dateOrder ? <ArrowDropUpIcon /> : <ArrowDropDownIcon />}
+                {dateOrder ? <ArrowDropDownIcon /> : <ArrowDropUpIcon />}
               </IconButton>
             </TableCell>
-            <TableCell align='center' style={{ fontWeight: 'bold', fontSize: 18 }}>Watched</TableCell>
-            <TableCell align='center' style={{ fontWeight: 'bold', fontSize: 18 }}>Remove</TableCell>
+            <TableCell align='center' style={{ fontWeight: 'bold', fontSize: 18, fontFamily: 'monospace' }}>
+              Watched
+            </TableCell>
+            <TableCell align='center' style={{ fontWeight: 'bold', fontSize: 18, fontFamily: 'monospace' }}>
+              Remove
+            </TableCell>
           </TableRow>
         </TableHead>
         <TableBody>
@@ -151,15 +158,15 @@ const MovieList = ({ movies, dateOrder, setDateOrder, entryChanged, setEntryChan
                   maxWidth: '300px',
                 }}
               >
-                <Typography>
-                  <Link
-                    href={`/movie/${m.movie_id}`}
-                  >
-                    { m.title }
-                  </Link>
-                </Typography>
+                <Link
+                  to={`/movie/${m.movie_id}`}
+                >
+                  <Typography sx={{ fontFamily: 'monospace' }}>
+                      { m.title }
+                  </Typography>
+                </Link>
               </TableCell>
-              <TableCell align='center'>
+              <TableCell align='center' style={{ fontFamily: 'monospace' }}>
                 { m.added_date.slice(0, 10) }
               </TableCell>
               <TableCell align='center'>
