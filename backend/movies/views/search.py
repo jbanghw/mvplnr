@@ -7,6 +7,6 @@ import requests
 class MovieSearchView(View):
     def get(self, request):
         search_expression = request.GET.get('search', '')
-        response = requests.get('https://imdb-api.com/en/API/SearchMovie/' + settings.IMDB_API_KEY + '/' + search_expression)
+        response = requests.get('https://tv-api.com/en/API/SearchMovie/' + settings.TV_API_KEY + '/' + search_expression)
         response = response.json()
         return JsonResponse(response)

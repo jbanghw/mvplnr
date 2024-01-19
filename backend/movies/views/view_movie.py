@@ -7,6 +7,6 @@ import requests
 class MovieView(View):
     def get(self, request):
         movie_id = request.GET.get('id', '')
-        response = requests.get('https://imdb-api.com/en/API/Title/' + settings.IMDB_API_KEY + '/' + movie_id)
+        response = requests.get('https://tv-api.com/en/API/Title/' + settings.TV_API_KEY + '/' + movie_id)
         response = response.json()
         return JsonResponse(response)

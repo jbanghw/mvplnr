@@ -13,7 +13,7 @@ class WatchMovieAPIView(APIView):
         user = request.user
         movie_id = request.data.get('movie_id')
 
-        title_request = requests.get('https://imdb-api.com/en/API/Title/k_e1gnyu67/{movie_id}'.format(movie_id = movie_id)).json()
+        title_request = requests.get('https://tv-api.com/en/API/Title/k_e1gnyu67/{movie_id}'.format(movie_id = movie_id)).json()
         title = title_request['title']
 
         already_added = MovieRecord.objects.filter(user=user,
