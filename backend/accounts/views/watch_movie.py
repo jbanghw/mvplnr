@@ -3,8 +3,8 @@ from rest_framework.views import APIView
 from rest_framework.permissions import IsAuthenticated
 from rest_framework import status
 from accounts.models import MovieRecord
-from datetime import date
-import requests, json
+from django.conf import settings
+import requests
 
 class WatchMovieAPIView(APIView):
     permission_classes = [IsAuthenticated]
@@ -13,7 +13,8 @@ class WatchMovieAPIView(APIView):
         user = request.user
         movie_id = request.data.get('movie_id')
 
-        title_request = requests.get('https://tv-api.com/en/API/Title/k_e1gnyu67/{movie_id}'.format(movie_id = movie_id)).json()
+        params = {'api_key': f'{settings.TMDB_API_KEY}'}
+        title_request = requests.get(f"{settings.TMDB_URL}/movie/{movie_id}", params=params).json()
         title = title_request['title']
 
         already_added = MovieRecord.objects.filter(user=user,
@@ -24,7 +25,6 @@ class WatchMovieAPIView(APIView):
                                                       movie_id=movie_id,
                                                       title=title,
                                                       watched=True)
-                                                    #   watched_date=date.today)
             return Response(
                 {'message': 'successfully watched a movie'},
                 status=status.HTTP_202_ACCEPTED
@@ -33,7 +33,6 @@ class WatchMovieAPIView(APIView):
         else:
             movie_record = already_added[0]
             movie_record.watched = True
-            # movie_record.watched_date = date.today
             movie_record.save()
             
             return Response(

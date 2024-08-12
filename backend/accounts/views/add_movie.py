@@ -2,9 +2,9 @@ from rest_framework.response import Response
 from rest_framework import status
 from rest_framework.views import APIView
 from rest_framework.permissions import IsAuthenticated
-from accounts.serializers import MovieRecordSerializer
 from accounts.models import MovieRecord
-import requests, json
+from django.conf import settings
+import requests
 
 class AddMovieAPIView(APIView):
     permission_classses = [IsAuthenticated]
@@ -13,7 +13,8 @@ class AddMovieAPIView(APIView):
         user = request.user
         movie_id = request.data.get('movie_id')
 
-        title_request = requests.get('https://tv-api.com/en/API/Title/k_e1gnyu67/{movie_id}'.format(movie_id = movie_id)).json()
+        params = {'api_key': f'{settings.TMDB_API_KEY}'}
+        title_request = requests.get(f"{settings.TMDB_URL}/movie/{movie_id}", params=params).json()
         title = title_request['title']
 
         already_added = MovieRecord.objects.filter(user=user,

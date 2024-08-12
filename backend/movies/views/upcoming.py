@@ -6,6 +6,6 @@ import requests
 # class MovieView():
 class UpcomingMoviesView(View):
     def get(self, request):
-        response = requests.get('https://tv-api.com/en/API/ComingSoon/' + settings.TV_API_KEY)
-        response = response.json()
+        params = {'api_key': f'{settings.TMDB_API_KEY}'}
+        response = requests.get(f'{settings.TMDB_URL}/movie/upcoming', params=params).json()
         return JsonResponse(response)

@@ -144,7 +144,8 @@ CORS_ORIGIN_WHITELIST = [
     'http://localhost:3000',
 ]
 
-TV_API_KEY = 'k_e1gnyu67'
+TMDB_URL = 'https://api.themoviedb.org/3'
+TMDB_API_KEY = ''
 
 SIMPLE_JWT = {
     'ACCESS_TOKEN_LIFETIME': timedelta(days=1),

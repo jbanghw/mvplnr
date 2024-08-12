@@ -1,6 +1,6 @@
 from rest_framework import serializers
 from django.contrib.auth import get_user_model
-from accounts.models import Review, MovieRecord
+from accounts.models import MovieRecord
 
 class UserSerializer(serializers.ModelSerializer):
     class Meta:
