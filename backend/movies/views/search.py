@@ -1,12 +1,15 @@
 from django.http import JsonResponse
 from django.views import View
 from django.conf import settings
+from dotenv import load_dotenv
 import requests
+import os
 
 # class MovieView():
 class MovieSearchView(View):
     def get(self, request):
         search_expression = request.GET.get('search', '')
-        params = {'api_key': f'{settings.TMDB_API_KEY}', 'query': search_expression}
+        load_dotenv()
+        params = {'api_key': os.getenv("TMDB_API_KEY"), 'query': search_expression}
         response = requests.get(f'{settings.TMDB_URL}/search/movie', params=params).json()
         return JsonResponse(response)

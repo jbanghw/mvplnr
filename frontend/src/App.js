@@ -1,5 +1,6 @@
 import Router from './Routers/index';
 import { createContext, useState } from 'react';
+import './config';
 
 export const LoggedinContext = createContext({
   loggedin: localStorage.getItem('access'),

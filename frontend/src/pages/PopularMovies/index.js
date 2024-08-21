@@ -14,8 +14,8 @@ export default function PopularMovies() {
         return res.json();
       })
       .then(json => {
-        if ('items' in json) {
-          setMovies(json['items']);
+        if ('results' in json) {
+          setMovies(json['results']);
         }
       });
     };
@@ -44,8 +44,8 @@ export default function PopularMovies() {
                 <MovieListItem
                   movie_id={movie['id']}
                   title={movie['title']}
-                  poster={movie['image']}
-                  description={movie['crew']}
+                  poster={movie['poster_path']}
+                  description={movie['overview']}
                 />
                 <Divider
                   orientation="horizontal"

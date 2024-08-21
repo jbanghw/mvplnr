@@ -11,50 +11,26 @@ const Img = styled('img')({
 
 const MovieListItem = ({ movie_id, title, poster, description }) => {
   return (
-    <Grid container spacing={2} maxHeight={'200px'}>
+    <Grid container spacing={2} justifyContent={'center'}>
       <Grid item xs={3}>
-        <Box sx={{ width: 160, height: 160, }}>
-          <Img src={poster} />
+        <Box sx={{ width: 200, height: 200, }}>
+          <Img src={`${global.config.TMDB_POSTER_PATH}${poster}`} />
         </Box>
       </Grid>
       <Grid item xs={9} container>
-        <Grid
-          item
-          xs
-          container
-          direction="column"
-          spacing={2}
-        >
+        <Grid item container direction="column" spacing={2}>
           <Grid item xs>
-            <Typography
-              gutterBottom
-              variant="h6"
-              sx={{
-                fontFamily: 'monospace',
-              }}
-            >
+            <Typography gutterBottom variant="h6">
               {title}
             </Typography>
-            <Typography
-              variant="body2"
-              gutterBottom
-              sx={{
-                fontFamily: 'monospace',
-              }}
-            >
+            <Typography gutterBottom variant="body2">
               {description}
             </Typography>
           </Grid>
           <Grid item textAlign={'right'} >
             <Link to={`/movie/${movie_id}`}>
               <Button variant='text'>
-                <Typography
-                  sx={{
-                    cursor: 'pointer',
-                    fontFamily: 'monospace',
-                  }}
-                  variant="body1"
-                >
+                <Typography variant="body1">
                   View More
                 </Typography>
               </Button>
