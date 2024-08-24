@@ -9,7 +9,7 @@ from movies.views.search import MovieSearchView
 app_name = 'movies'
 
 urlpatterns = [
-    path('movie/', MovieView.as_view(), name='movie'),
+    path('movie/<int:id>/', MovieView.as_view(), name='movie'),
     path('search/', MovieSearchView.as_view(), name='movie_search'),
     path('popular/', PopularMoviesView.as_view(), name='popular_movies'),
     path('upcoming/', UpcomingMoviesView.as_view(), name='upcoming_movies'),

@@ -7,9 +7,8 @@ import os
 
 # class MovieView():
 class MovieView(View):
-    def get(self, request):
-        movie_id = request.GET.get('id', '')
+    def get(self, request, id):
         load_dotenv()
         params = {'api_key': os.getenv("TMDB_API_KEY")}
-        response = requests.get(f'{settings.TMDB_URL}/movie/{movie_id}', params=params).json()
+        response = requests.get(f'{settings.TMDB_URL}/movie/{id}', params=params).json()
         return JsonResponse(response)
