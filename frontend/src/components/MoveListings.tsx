@@ -18,9 +18,7 @@ const MovieListings = ({ showAll, url, errorMessage }: { showAll: boolean, url: 
         if (data.status) {
           setMovies(data.movies)
           if (!showAll) {
-            setMovies(
-              movies.slice(0, 10)
-            )
+            setMovies(prevMovies => prevMovies.slice(0, 6))
           }
         }
       } catch (error) {
@@ -33,7 +31,7 @@ const MovieListings = ({ showAll, url, errorMessage }: { showAll: boolean, url: 
   }, [])
 
   return (
-    <section className="bg-blue50 px-4 py10">
+    <section className="bg-blue50 m-4">
       <div className="container-xl lg:container m-auto">
         <h2 className="text-3xl font-bold text-indigo-500 mb-6 text-center">
           Popular Movies
