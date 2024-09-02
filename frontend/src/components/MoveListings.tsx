@@ -10,12 +10,12 @@ const MovieListings = ({ showAll, url, errorMessage }: { showAll: boolean, url: 
   useEffect(() => {
     const fetchMovies = async () => {
       try {
-        const res = await fetch(url, {
+        const response = await fetch(url, {
           method: 'GET',
           mode: 'cors'
         })
-        const data = await res.json()
-        if (data.status) {
+        const data = await response.json()
+        if (response.status === 200 && data.status) {
           setMovies(data.movies)
           if (!showAll) {
             setMovies(prevMovies => prevMovies.slice(0, 6))
@@ -31,14 +31,14 @@ const MovieListings = ({ showAll, url, errorMessage }: { showAll: boolean, url: 
   }, [])
 
   return (
-    <section className="bg-blue50 m-4">
-      <div className="container-xl lg:container m-auto">
-        <h2 className="text-3xl font-bold text-indigo-500 mb-6 text-center">
+    <section>
+      <div>
+        <h2>
           Popular Movies
         </h2>
         {loading
           ? <Spinner loading={loading} />
-          : <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+          : <div>
             {
               movies.map((movie) => {
                 return <MovieListing key={movie.id} movie={movie} />

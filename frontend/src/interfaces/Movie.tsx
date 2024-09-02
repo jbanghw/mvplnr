@@ -1,5 +1,5 @@
 export default interface Movie {
-  id: number
+  id: number | string | undefined
   title?: string
   poster_path?: string
   release_date?: string

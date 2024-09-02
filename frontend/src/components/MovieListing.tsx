@@ -5,9 +5,9 @@ const MovieListing = ({ movie }: { movie: Movie }) => {
   const posterURL = import.meta.env.VITE_TMDB_POSTER_URL
 
   return (
-    <div className="bg-gray-700 rounded-xl shadow-xl relative overflow-hidden">
-      <div className="flex flex-col lg:flex-row justify-between mb-4">
-        <div>
+    <div>
+      <div>
+        <div className="max-w-56">
           <img src={`${posterURL}${movie.poster_path}`} />
         </div>
         <div>
@@ -17,7 +17,7 @@ const MovieListing = ({ movie }: { movie: Movie }) => {
           {movie.release_date}
         </div>
       </div>
-      <Link to={`/movie/${movie.id}`}>KEKW</Link>
+      <Link to={`/movies/${movie.id}`}>View More</Link>
 
     </div>
   )
