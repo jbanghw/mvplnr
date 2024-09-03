@@ -15,7 +15,7 @@ const MovieListings = ({ showAll, url, errorMessage }: { showAll: boolean, url: 
           mode: 'cors'
         })
         const data = await response.json()
-        if (response.status === 200 && data.status) {
+        if (response.ok && data.status) {
           setMovies(data.movies)
           if (!showAll) {
             setMovies(prevMovies => prevMovies.slice(0, 6))

@@ -21,7 +21,7 @@ const RegisterPage = () => {
         method: 'POST',
         body: formData,
       })
-      if (response.status === 201) {
+      if (response.ok) {
         navigate('/login')
         return
       }

@@ -28,4 +28,4 @@ class UserCreateSerializer(serializers.ModelSerializer):
 class MovieRecordSerializer(serializers.ModelSerializer):
     class Meta:
         model = MovieRecord
-        fields = ['added_date', 'watched_date', 'watched', 'user', 'movie_id', 'title']
+        fields = ['added_date', 'watched', 'user', 'movie_id', 'title']

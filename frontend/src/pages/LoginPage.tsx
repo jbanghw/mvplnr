@@ -29,7 +29,7 @@ const LoginPage = () => {
         body: formData,
       })
       const data = await response.json()
-      if (response.status === 200) {
+      if (response.ok) {
         localStorage.setItem('access', data['access'])
         setLoggedIn(data['access'])
         navigate('/profile')
