@@ -3,7 +3,6 @@ import { useParams } from "react-router-dom"
 import Movie from "../interfaces/Movie"
 import Spinner from "../components/Spinner"
 import AuthContext from "../contexts/AuthContext"
-import NotFoundPage from "./NotFoundPage"
 import AddMovieService from "../services/AddMovieService"
 import RemoveMovieService from "../services/RemoveMovieService"
 import { toast } from "react-toastify"
@@ -74,10 +73,6 @@ const MoviePage = () => {
     }
   }, [])
 
-  if (!('title' in movie)) {
-    return <NotFoundPage />
-  }
-
   return (
     <>
       {
@@ -99,7 +94,7 @@ const MoviePage = () => {
             <div>
               {
                 movie['genres']?.map((genre) => {
-                  return <span>{genre}</span>
+                  return <span key={genre}>{genre}</span>
                 })
               }
             </div>

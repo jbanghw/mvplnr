@@ -1,4 +1,4 @@
-import MovieListings from "../components/MoveListings"
+import MovieListings from "../components/MovieListings"
 
 const HomePage = () => {
 
