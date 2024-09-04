@@ -10,6 +10,7 @@ import LoginPage from "./pages/LoginPage"
 import RegisterPage from "./pages/RegisterPage"
 import ProfilePage from "./pages/ProfilePage"
 import PopularMoviesPage from "./pages/PopularMoviesPage"
+import SearchResultPage from "./pages/SearchResultPage"
 
 function App() {
   const [loggedIn, setLoggedIn] = useState(localStorage.getItem('access'))
@@ -23,6 +24,7 @@ function App() {
         <Route path="/register" element={<RegisterPage />} />
         <Route path="/profile" element={<ProfilePage />} />
         <Route path="/movies/popular" element={<PopularMoviesPage />} />
+        <Route path="/search/:search" element={<SearchResultPage />} />
         <Route path="/movies/:id" element={<MoviePage />} />
       </Route>
     )

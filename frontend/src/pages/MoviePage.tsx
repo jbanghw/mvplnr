@@ -112,17 +112,19 @@ const MoviePage = () => {
               </a>
             </div>
             {
-              loggedIn !== null && isAdded
-                ? <div>
-                  <button onClick={handleRemoveMovie}>
-                    Remove from list
-                  </button>
-                </div>
-                : <div>
-                  <button onClick={handleAddMovie}>
-                    Add to list
-                  </button>
-                </div>
+              loggedIn !== null
+                ? isAdded
+                  ? <div>
+                    <button onClick={handleRemoveMovie}>
+                      Remove from list
+                    </button>
+                  </div>
+                  : <div>
+                    <button onClick={handleAddMovie}>
+                      Add to list
+                    </button>
+                  </div>
+                : null
             }
           </div >
       }

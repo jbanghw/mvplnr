@@ -1,6 +1,7 @@
 import { useContext } from "react"
 import { NavLink } from "react-router-dom"
 import AuthContext from "../contexts/AuthContext"
+import SearchBar from "./SearchBar"
 
 const LoggedInNavbar = () => {
   const { setLoggedIn } = useContext(AuthContext)
@@ -52,6 +53,7 @@ const Navbar = () => {
                 <NavLink to='/movies/popular'>
                   Popular Movies
                 </NavLink>
+                <SearchBar />
               </div>
             </div>
             <div>

@@ -12,7 +12,7 @@ class MovieView(View):
         params = {'api_key': os.getenv("TMDB_API_KEY")}
         response = requests.get(f'{settings.TMDB_URL}/movie/{id}', params=params)
 
-        if response.status_code != 200:
+        if not response.ok:
             return JsonResponse({'status': False, 'message': 'Failed to fetch movie.'}, status=404)
 
         movie = response.json()

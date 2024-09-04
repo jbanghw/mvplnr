@@ -11,5 +11,19 @@ class MovieSearchView(View):
         search_expression = request.GET.get('search', '')
         load_dotenv()
         params = {'api_key': os.getenv("TMDB_API_KEY"), 'query': search_expression}
-        response = requests.get(f'{settings.TMDB_URL}/search/movie', params=params).json()
-        return JsonResponse(response)
+        response = requests.get(f'{settings.TMDB_URL}/search/movie', params=params)
+
+        if not response.ok:
+            return JsonResponse({'status': False, 'message': 'Failed to search.'}, status=404)
+        
+        movies = response.json()['results']
+        result = {'status': True, 'movies': []}
+        for movie in movies:
+            if movie['poster_path']:
+                result['movies'].append({
+                    'id': movie['id'],
+                    'title': movie['title'],
+                    'poster_path': movie['poster_path'],
+                    'release_date': movie['release_date'],
+                })
+        return JsonResponse(result, status=200)

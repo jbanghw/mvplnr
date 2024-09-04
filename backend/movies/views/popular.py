@@ -12,7 +12,7 @@ class PopularMoviesView(View):
         params = {'api_key': os.getenv("TMDB_API_KEY")}
         response = requests.get(f'{settings.TMDB_URL}/movie/popular', params=params)
 
-        if response.status_code != 200:
+        if not response.ok:
             return JsonResponse({'status': False, 'message': 'Failed to fetch popular movies.'}, status=404)
 
         movies = response.json()['results']
