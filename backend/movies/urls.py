@@ -12,6 +12,6 @@ urlpatterns = [
     path('movie/<int:id>/', MovieView.as_view(), name='movie'),
     path('search/', MovieSearchView.as_view(), name='movie_search'),
     path('popular/', PopularMoviesView.as_view(), name='popular_movies'),
-    path('upcoming/', UpcomingMoviesView.as_view(), name='upcoming_movies'),
     path('in_theaters/', InTheatersView.as_view(), name='current_movies'),
+    path('upcoming/', UpcomingMoviesView.as_view(), name='upcoming_movies'),
 ]
