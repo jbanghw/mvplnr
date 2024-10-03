@@ -5,4 +5,4 @@ source venv/bin/activate
 ./manage.py runserver 8000 &
 
 cd ../frontend/
-npm start
+npm run dev

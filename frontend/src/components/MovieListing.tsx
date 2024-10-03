@@ -6,15 +6,15 @@ const MovieListing = ({ movie }: { movie: Movie }) => {
 
   return (
     <Link to={`/movies/${movie.id}`}>
-      <div className="bg-gray-700 rounded-xl shadow-md relative">
-        <div className="p-4">
+      <div className="bg-gray-700 rounded-xl shadow-md relative max-w-60 h-full">
+        <div className="p-4 flex flex-col justify-start h-full">
           <div className="max-w-56">
             <img className="rounded-xl" src={`${posterURL}${movie.poster_path}`} />
           </div>
           <div className="text-xl font-bold my-2">
             {movie.title}
           </div>
-          <div>
+          <div className="mt-auto">
             Release Date: {movie.release_date}
           </div>
         </div>
