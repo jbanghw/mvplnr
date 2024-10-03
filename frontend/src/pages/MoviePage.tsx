@@ -79,12 +79,10 @@ const MoviePage = () => {
         loading
           ? <Spinner loading={loading} />
           :
-          // <section className="flex justify-center align-middle space-x-10 mx-5">
-          <section className="grid grid-cols-2 space-x-2 justify-items-center mx-5">
+          <section className="max-w-7xl grid grid-cols-2 space-x-2 justify-items-center mx-5">
             <div className="max-w-80">
               <img className="rounded-xl" src={`${posterURL}${movie.poster_path}`} alt='movie poster' />
             </div>
-            {/* <div className="flex flex-col space-y-3 justify-start h-full"> */}
             <div className="grid grid-cols-1 justify-start justify-items-start">
               <div className="text-3xl">
                 {movie['title']}
@@ -95,10 +93,14 @@ const MoviePage = () => {
               <div>
                 Runtime: {movie['runtime']} minutes
               </div>
-              <div className="flex space-x-4">
+              <div className="flex">
+                Genres:&nbsp;
                 {
-                  movie['genres']?.map((genre) => {
-                    return <span key={genre}>{genre}</span>
+                  movie['genres']?.map((genre, i) => {
+                    return <span key={genre}>
+                      {i > 0 && ', '}
+                      {genre}
+                    </span>
                   })
                 }
               </div>
