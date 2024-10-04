@@ -4,11 +4,14 @@ import AuthContext from "../contexts/AuthContext"
 import UserMovie from "../interfaces/UserMovie"
 import ReactPaginate from "react-paginate"
 import ProfileMovies from "../components/ProfileMovies"
+import { AiFillLeftCircle, AiFillRightCircle } from "react-icons/ai"
 
 const ProfilePage = () => {
   const { loggedIn } = useContext(AuthContext)
   const navigate = useNavigate()
   const moviesPerPage = 10
+  const active = 'text-white bg-black hover:bg-gray-600 hover:text-white rounded-md px-3 py-2'
+  const inactive = 'text-white hover:bg-gray-500 hover:text-white rounded-md px-3 py-2'
 
   const [movies, setMovies] = useState<UserMovie[]>([])
   const [pageCount, setPageCount] = useState(0)
@@ -50,42 +53,46 @@ const ProfilePage = () => {
   }, [currentPage, entryChanged, watchedFilter, dateOrder])
 
   return (
-    <div>
-      <div>
-        <button onClick={() => {
-          setWatchedFilter(-1)
-        }}>
-          Not Watched
-        </button>
-        <button onClick={() => {
-          setWatchedFilter(0)
-        }}>
-          All
-        </button>
-        <button onClick={() => {
-          setWatchedFilter(1)
-        }}>
-          Watched
-        </button>
+    <div className="grid grid-cols-1 sm:w-full md:w-11/12 space-y-5 text-center">
+      <div className="flex flex-row justify-between w-full">
+        <div className="flex flex-row space-x-5">
+          <button className={watchedFilter === -1 ? active : inactive} onClick={() => {
+            setWatchedFilter(-1)
+          }}>
+            Not Watched
+          </button>
+          <button className={watchedFilter === 0 ? active : inactive} onClick={() => {
+            setWatchedFilter(0)
+          }}>
+            All
+          </button>
+          <button className={watchedFilter === 1 ? active : inactive} onClick={() => {
+            setWatchedFilter(1)
+          }}>
+            Watched
+          </button>
+        </div>
+        <div>
+          <form onSubmit={handleSearch}>
+            <input
+              type='text'
+              placeholder='search'
+              className="bg-black mr-3 rounded-md"
+              value={titleFilter}
+              onChange={(e) => setTitleFilter(e.target.value)}
+              onKeyDown={(e) => {
+                if (e.key === 'Enter') {
+                  setEntryChanged(prev => !prev)
+                }
+              }} />
+            <button type='submit'>Filter</button>
+          </form>
+        </div>
       </div>
-      <div>
-        <form onSubmit={handleSearch}>
-          <input
-            type='text'
-            placeholder='search'
-            className="bg-black"
-            value={titleFilter}
-            onChange={(e) => setTitleFilter(e.target.value)}
-            onKeyDown={(e) => {
-              if (e.key === 'Enter') {
-                setEntryChanged(prev => !prev)
-              }
-            }} />
-          <button type='submit'>Filter</button>
-        </form>
+      <div className="w-full">
+        <ProfileMovies movies={movies} dateOrder={dateOrder} setDateOrder={setDateOrder} setCurrentPage={setCurrentPage} setEntryChanged={setEntryChanged} />
       </div>
-      <ProfileMovies movies={movies} dateOrder={dateOrder} setDateOrder={setDateOrder} setCurrentPage={setCurrentPage} setEntryChanged={setEntryChanged} />
-      <ReactPaginate
+      {/* <ReactPaginate
         breakLabel="..."
         nextLabel="next >"
         onPageChange={(e) => {
@@ -95,6 +102,28 @@ const ProfilePage = () => {
         pageCount={pageCount}
         previousLabel="< previous"
         renderOnZeroPageCount={null}
+      /> */}
+      <ReactPaginate
+        breakLabel="..."
+        containerClassName={"pagination"}
+        pageClassName={"page-item"}
+        activeClassName={"active"}
+        onPageChange={(e) => {
+          setCurrentPage(e.selected)
+        }}
+        pageRangeDisplayed={5}
+        pageCount={pageCount}
+        renderOnZeroPageCount={null}
+        previousLabel={
+          // <IconContext.Provider value={{ color: "#B8C1CC", size: "36px" }}>
+          <AiFillLeftCircle />
+          // </IconContext.Provider>
+        }
+        nextLabel={
+          // <IconContext.Provider value={{ color: "#B8C1CC", size: "36px" }}>
+          <AiFillRightCircle />
+          // </IconContext.Provider>
+        }
       />
     </div>
   )

@@ -19,7 +19,7 @@ const SearchBar = () => {
         <input
           type='text'
           placeholder='search'
-          className="bg-black mr-3"
+          className="bg-black mr-3 rounded-md"
           value={searchInput}
           onChange={(e) => setSearchInput(e.target.value)}
           onKeyDown={(e) => {

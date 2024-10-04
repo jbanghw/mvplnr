@@ -2,8 +2,9 @@ import { toast } from "react-toastify"
 import UserMovie from "../interfaces/UserMovie"
 import RemoveMovieService from "../services/RemoveMovieService"
 import { useNavigate } from "react-router-dom"
-import { useContext } from "react"
+import { useContext, useState } from "react"
 import AuthContext from "../contexts/AuthContext"
+import { FaArrowCircleDown, FaArrowCircleUp, FaEye, FaEyeSlash } from "react-icons/fa"
 
 interface PropsType {
   movies: UserMovie[]
@@ -16,6 +17,8 @@ interface PropsType {
 const ProfileMovies = ({ movies, dateOrder, setDateOrder, setCurrentPage, setEntryChanged }: PropsType) => {
   const { loggedIn } = useContext(AuthContext)
   const navigate = useNavigate()
+  const [orderHover, setOrderHover] = useState(false)
+  const [watchHover, setWatchHover] = useState('')
 
   const handleOrderChange = () => {
     setDateOrder(prev => 1 - prev)
@@ -64,52 +67,74 @@ const ProfileMovies = ({ movies, dateOrder, setDateOrder, setCurrentPage, setEnt
   }
 
   return (
-    <table>
-      <thead>
-        <tr>
-          <th>
-            Title
-          </th>
-          <th>
-            Date Added <button onClick={handleOrderChange}>{dateOrder === 1 ? 'desc' : 'asc'}</button>
-          </th>
-          <th>
-            Watch / Unwatch
-          </th>
-          <th>
-            Remove
-          </th>
-        </tr>
-      </thead>
-      <tbody>
-        {
-          movies.map((movie) => {
-            return <tr key={movie.movie_id}>
-              <td>
-                <button onClick={(e) => {
-                  navigate(`/movies/${movie.movie_id}`)
-                }}>
-                  {movie.title}
-                </button>
-              </td>
-              <td>
-                {movie.added_date.slice(0, 10)}
-              </td>
-              <td>
-                <button onClick={() => handleWatch(movie.movie_id, movie.watched)}>
-                  {movie.watched ? 'UNWATCH' : 'WATCH'}
-                </button>
-              </td>
-              <td>
-                <button onClick={() => handleRemove(movie.movie_id)}>
-                  Remove
-                </button>
-              </td>
-            </tr>
-          })
-        }
-      </tbody>
-    </table>
+    <div className="grid md:grid-cols-6 sm:grid-cols-5 w-full">
+      <div className="md:col-span-3 sm:col-span-2 text-center">
+        Title
+      </div>
+      <div className="col-span-1 flex flex-row space-x-2 justify-center">
+        <div>
+          Date Added
+        </div>
+        <button
+          onClick={handleOrderChange}
+          onMouseEnter={() => {
+            setOrderHover(true)
+          }}
+          onMouseLeave={() => {
+            setOrderHover(false)
+          }}
+        >
+          {dateOrder === 1
+            ?
+            orderHover ? <FaArrowCircleUp /> : <FaArrowCircleDown />
+            :
+            orderHover ? <FaArrowCircleDown /> : <FaArrowCircleUp />
+          }
+        </button>
+      </div>
+      <div className="col-span-1">
+        Watched
+      </div>
+      <div className="col-span-1 ">
+        Remove
+      </div>
+      {
+        movies.map((movie) => {
+          return <div key={movie.movie_id} className="md:col-span-6 sm:col-span-5 grid md:grid-cols-6 sm:grid-cols-5 text-center">
+            <button className="md:col-span-3 sm:col-span-2 text-left" onClick={(_) => {
+              navigate(`/movies/${movie.movie_id}`)
+            }}>
+              <span className="font-semibold line-clamp-1">
+                {movie.title}
+              </span>
+            </button>
+            <div className="col-span-1 flex justify-center">
+              {movie.added_date.slice(0, 10)}
+            </div>
+            <button
+              className="col-span-1 flex justify-center"
+              onClick={() => handleWatch(movie.movie_id, movie.watched)}
+              onMouseEnter={() => {
+                setWatchHover(movie.movie_id)
+              }}
+              onMouseLeave={() => {
+                setWatchHover('')
+              }}
+            >
+              {movie.watched
+                ?
+                watchHover === movie.movie_id ? <FaEyeSlash /> : <FaEye />
+                :
+                watchHover === movie.movie_id ? <FaEye /> : <FaEyeSlash />
+              }
+            </button>
+            <button className="col-span-1" onClick={() => handleRemove(movie.movie_id)}>
+              Remove
+            </button>
+          </div>
+        })
+      }
+    </div>
   )
 }
 
