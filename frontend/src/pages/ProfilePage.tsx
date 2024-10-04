@@ -5,6 +5,7 @@ import UserMovie from "../interfaces/UserMovie"
 import ReactPaginate from "react-paginate"
 import ProfileMovies from "../components/ProfileMovies"
 import { AiFillLeftCircle, AiFillRightCircle } from "react-icons/ai"
+import { IconContext } from "react-icons"
 
 const ProfilePage = () => {
   const { loggedIn } = useContext(AuthContext)
@@ -92,39 +93,43 @@ const ProfilePage = () => {
       <div className="w-full">
         <ProfileMovies movies={movies} dateOrder={dateOrder} setDateOrder={setDateOrder} setCurrentPage={setCurrentPage} setEntryChanged={setEntryChanged} />
       </div>
-      {/* <ReactPaginate
-        breakLabel="..."
-        nextLabel="next >"
-        onPageChange={(e) => {
-          setCurrentPage(e.selected)
-        }}
-        pageRangeDisplayed={5}
-        pageCount={pageCount}
-        previousLabel="< previous"
-        renderOnZeroPageCount={null}
-      /> */}
-      <ReactPaginate
-        breakLabel="..."
-        containerClassName={"pagination"}
-        pageClassName={"page-item"}
-        activeClassName={"active"}
-        onPageChange={(e) => {
-          setCurrentPage(e.selected)
-        }}
-        pageRangeDisplayed={5}
-        pageCount={pageCount}
-        renderOnZeroPageCount={null}
-        previousLabel={
-          // <IconContext.Provider value={{ color: "#B8C1CC", size: "36px" }}>
-          <AiFillLeftCircle />
-          // </IconContext.Provider>
-        }
-        nextLabel={
-          // <IconContext.Provider value={{ color: "#B8C1CC", size: "36px" }}>
-          <AiFillRightCircle />
-          // </IconContext.Provider>
-        }
-      />
+      {/* <div className="flex flex-row justify-center">
+        <ReactPaginate
+          breakLabel="..."
+          nextLabel="next >"
+          onPageChange={(e) => {
+            setCurrentPage(e.selected)
+          }}
+          pageRangeDisplayed={5}
+          pageCount={pageCount}
+          previousLabel="< previous"
+          renderOnZeroPageCount={null}
+        />
+      </div> */}
+      <div className="flex flex-row justify-center">
+        <ReactPaginate
+          breakLabel="..."
+          containerClassName={"pagination"}
+          pageClassName={"page-item"}
+          activeClassName={"active"}
+          onPageChange={(e) => {
+            setCurrentPage(e.selected)
+          }}
+          pageRangeDisplayed={5}
+          pageCount={pageCount}
+          renderOnZeroPageCount={null}
+          previousLabel={
+            <IconContext.Provider value={{ color: "#B8C1CC", size: "36px" }}>
+              <AiFillLeftCircle />
+            </IconContext.Provider>
+          }
+          nextLabel={
+            <IconContext.Provider value={{ color: "#B8C1CC", size: "36px" }}>
+              <AiFillRightCircle />
+            </IconContext.Provider>
+          }
+        />
+      </div>
     </div>
   )
 }

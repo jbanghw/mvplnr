@@ -5,6 +5,8 @@ import { useNavigate } from "react-router-dom"
 import { useContext, useState } from "react"
 import AuthContext from "../contexts/AuthContext"
 import { FaArrowCircleDown, FaArrowCircleUp, FaEye, FaEyeSlash } from "react-icons/fa"
+import { MdDeleteOutline } from "react-icons/md"
+import { IconContext } from "react-icons"
 
 interface PropsType {
   movies: UserMovie[]
@@ -123,16 +125,37 @@ const ProfileMovies = ({ movies, dateOrder, setDateOrder, setCurrentPage, setEnt
             >
               {movie.watched
                 ?
-                watchHover === movie.movie_id ? <FaEyeSlash /> : <FaEye />
+                watchHover === movie.movie_id ?
+                  <IconContext.Provider value={{ size: '32px' }}>
+                    <FaEyeSlash />
+                  </IconContext.Provider> :
+                  <IconContext.Provider value={{ size: '32px' }}>
+                    <FaEye />
+                  </IconContext.Provider>
                 :
-                watchHover === movie.movie_id ? <FaEye /> : <FaEyeSlash />
+                watchHover === movie.movie_id ?
+                  <IconContext.Provider value={{ size: '32px' }}>
+                    <FaEye />
+                  </IconContext.Provider> :
+                  <IconContext.Provider value={{ size: '32px' }}>
+                    <FaEyeSlash />
+                  </IconContext.Provider>
               }
             </button>
-            <button className="col-span-1" onClick={() => handleRemove(movie.movie_id)}>
-              Remove
+            <button className="col-span-1 flex justify-center" onClick={() => handleRemove(movie.movie_id)}>
+              <IconContext.Provider value={{ color: 'red', size: "32px" }}>
+                <MdDeleteOutline />
+              </IconContext.Provider>
             </button>
           </div>
         })
+      }
+      {
+        Array.from({ length: 10 - movies.length }, (_, idx) =>
+          <div key={idx} className="md:col-span-6 sm:col-span-5 h-9">
+            &nbsp;
+          </div>
+        )
       }
     </div>
   )
