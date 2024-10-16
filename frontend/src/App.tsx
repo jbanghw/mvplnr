@@ -31,7 +31,9 @@ function App() {
         <Route path="/movies/:id" element={<MoviePage />} />
         <Route path="*" element={<NotFoundPage />} />
       </Route>
-    )
+    ), {
+    basename: '/movies'
+  }
   )
 
   return (

@@ -2,6 +2,7 @@ import { FormEventHandler, useState } from "react"
 import { useNavigate } from "react-router-dom"
 
 const RegisterPage = () => {
+  const api = import.meta.env.VITE_API_URL
   const navigate = useNavigate()
 
   // error messages
@@ -17,7 +18,7 @@ const RegisterPage = () => {
     try {
       e.preventDefault()
       const formData = new FormData(e.currentTarget)
-      const response = await fetch('/api/accounts/register/', {
+      const response = await fetch(`${api}/accounts/register/`, {
         method: 'POST',
         body: formData,
       })

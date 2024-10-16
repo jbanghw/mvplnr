@@ -8,6 +8,7 @@ import { AiFillLeftCircle, AiFillRightCircle } from "react-icons/ai"
 import { IconContext } from "react-icons"
 
 const ProfilePage = () => {
+  const api = import.meta.env.VITE_API_URL
   const { loggedIn } = useContext(AuthContext)
   const navigate = useNavigate()
   const moviesPerPage = 10
@@ -33,7 +34,7 @@ const ProfilePage = () => {
     }
 
     const fetchMovies = async () => {
-      const url = `/api/accounts/movies/?title_filter=${titleFilter}&watched=${watchedFilter}&limit=${moviesPerPage}&offset=${moviesPerPage * currentPage}&date_order=${dateOrder}`
+      const url = `${api}/accounts/movies/?title_filter=${titleFilter}&watched=${watchedFilter}&limit=${moviesPerPage}&offset=${moviesPerPage * currentPage}&date_order=${dateOrder}`
       try {
         const response = await fetch(url, {
           method: 'GET',

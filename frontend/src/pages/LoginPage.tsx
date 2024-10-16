@@ -3,6 +3,7 @@ import AuthContext from "../contexts/AuthContext"
 import { useNavigate } from "react-router-dom"
 
 const LoginPage = () => {
+  const api = import.meta.env.VITE_API_URL
   const { loggedIn, setLoggedIn } = useContext(AuthContext)
   const navigate = useNavigate()
 
@@ -24,7 +25,7 @@ const LoginPage = () => {
       e.preventDefault()
 
       const formData = new FormData(e.currentTarget)
-      const response = await fetch('/api/accounts/api/token/', {
+      const response = await fetch(`${api}/accounts/api/token/`, {
         method: 'POST',
         body: formData,
       })

@@ -17,6 +17,7 @@ interface PropsType {
 }
 
 const ProfileMovies = ({ movies, dateOrder, setDateOrder, setCurrentPage, setEntryChanged }: PropsType) => {
+  const api = import.meta.env.VITE_API_URL
   const { loggedIn } = useContext(AuthContext)
   const navigate = useNavigate()
   const [orderHover, setOrderHover] = useState(false)
@@ -41,9 +42,9 @@ const ProfileMovies = ({ movies, dateOrder, setDateOrder, setCurrentPage, setEnt
   const handleWatch = async (movie_id: string, watched: boolean) => {
     let url: string
     if (watched) {
-      url = `/api/accounts/unwatch_movie/`
+      url = `${api}/accounts/unwatch_movie/`
     } else {
-      url = `/api/accounts/watch_movie/`
+      url = `${api}/accounts/watch_movie/`
     }
 
     try {

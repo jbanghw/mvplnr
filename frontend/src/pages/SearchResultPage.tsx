@@ -5,6 +5,7 @@ import Spinner from "../components/Spinner"
 import MovieListing from "../components/MovieListing"
 
 const SearchResultPage = () => {
+  const api = import.meta.env.VITE_API_URL
   let { search } = useParams()
   const [movies, setMovies] = useState<Movie[]>()
   const [loading, setLoading] = useState(true)
@@ -12,7 +13,7 @@ const SearchResultPage = () => {
   useEffect(() => {
     const fetchSearch = async () => {
       try {
-        const response = await fetch(`/api/movies/search/?search=${search}`, { method: 'GET' })
+        const response = await fetch(`${api}/movies/search/?search=${search}`, { method: 'GET' })
         const data = await response.json()
         if (response.ok && data.status) {
           setMovies(data.movies)

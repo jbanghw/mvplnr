@@ -8,6 +8,7 @@ import RemoveMovieService from "../services/RemoveMovieService"
 import { toast } from "react-toastify"
 
 const MoviePage = () => {
+  const api = import.meta.env.VITE_API_URL
   const { id } = useParams()
   const { loggedIn } = useContext(AuthContext)
   const [movie, setMovie] = useState<Movie>({ id })
@@ -35,7 +36,7 @@ const MoviePage = () => {
     // fetch movie data
     const fetchMovie = async () => {
       try {
-        const response = await fetch(`/api/movies/movie/${id}/`, {
+        const response = await fetch(`${api}/movies/movie/${id}/`, {
           method: 'GET',
           mode: 'cors'
         })
@@ -56,7 +57,7 @@ const MoviePage = () => {
     // fetch if movie is added to the user's list
     const fetchIsAdded = async () => {
       try {
-        const response = await fetch(`/api/accounts/is_added/?id=${id}`, {
+        const response = await fetch(`${api}/accounts/is_added/?id=${id}`, {
           method: 'GET',
           headers: { 'Authorization': `Bearer ${loggedIn}` },
         })
